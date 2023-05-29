@@ -85,11 +85,14 @@ class StereoRectify(object):
         images_right = glob.glob(cal_path + 'Image2' + '*.bmp')
         images_left.sort()
         images_right.sort()
+        
+        flags = 0
+        flags |= cv2.CALIB_ZERO_DISPARITY
         R1, R2, P1, P2, Q, validPixROI1, validPixROI2 = cv2.stereoRectify(left_camera_matrix,
                                                                         left_distortion,
                                                                         right_camera_matrix,
                                                                         right_distortion,
-                                                                        size, R, T, alpha=0)
+                                                                        size, R, T,flags, alpha=-1)
         # 计算更正map
 
         # img_disp = np.zeros((5472, 3648),dtype=np.int32)
